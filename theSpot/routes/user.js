@@ -7,16 +7,15 @@ const pool = require('../module/pool')
 const query = require('../module/query');
 
 router.post('/signin', async (req,res)=>{
-    console.log(req.body);
-    //const findAlreadyResult = await pool.queryParam_Arr(query.findAlready, ['올 인자']);
-    // if(!findAlreadyResult) {
-    //     await resUtil.successFalse(statCode.FAIL, resMsg.ALREADY_USER);
-    // }
-    // else {
-    //     await resUtil.successTrue(statCode.OK, resMsg.SIGNIN_SUCCESS);
-    // }
-    res.send('테스트');
-    res.end();
+    const findAlreadyResult = await pool.queryParam_Arr(query.findAlready,[req.body.email]);
+    console.log(findAlreadyResult);
+    if(findAlreadyResult.length!==0) {
+        await res.status(200).send(resUtil.successFalse(statCode.FAIL, resMsg.ALREADY_USER));
+    }
+    else {
+        await pool.queryParam_Arr(query.insertUser, [req.body.email, req.body.profileImg, req.body.nickname]);
+        await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.SIGNIN_SUCCESS));
+    }
 })
 
 

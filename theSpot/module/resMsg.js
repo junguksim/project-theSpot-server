@@ -4,5 +4,7 @@ module.exports = {
 
     'FIND_ADDRESS_SUCCESS' : '주소 찾기 성공',
     'NO_ADDRESS_INPUT' : '주소가 입력되지 않음',
-    'NO_FIND_RESULT' : '해당하는 주소가 없음'
+    'NO_FIND_RESULT' : '해당하는 주소가 없음',
+
+    'CENTER_POINT_COMPLETE' : '중간 지점 도출 완료'
 }
