@@ -5,40 +5,17 @@ const resUtil = require('../module/responseUtil');
 const statCode = require('../module/statusCode');
 const resMsg = require('../module/resMsg');
 const ak = require('../config/appkey');
+const kakaoAPI = require('../module/kakaoAPI');
 
 router.get('/find', async (req,res)=>{
-    const options = {
-        'uri' : 'https://dapi.kakao.com/v2/local/search/address.json', 
-        'headers' : {
-            'Authorization' : `KakaoAK ${ak.AK}`,
-            'Content-Type' : 'application/x-www-form-urlencoded'
-        },
-        'qs' : {
-            'query' : `${req.query.addr}`
-        }
-        
-    }
-    if(!req.query.addr) {
-        await res.status(200).send(resUtil.successFalse(statCode.FAIL, resMsg.NO_ADDRESS_INPUT))
+    const result = await kakaoAPI.find(req.query.addr);
+    console.log(result);
+    if(result.meta.total_count === 0) {
+        await res.status(200).send(resUtil.successFalse(statCode.FAIL, resMsg.NO_FIND_RESULT));
     }
     else {
-        await request(options, async (err, result)=>{
-            const jsonResult = JSON.parse(result.body);
-            console.log(jsonResult);
-            if(err) console.log('request err : ' + err);
-            else if (jsonResult.meta.total_count == 0) { //찾는 주소가 없을때
-                await res.status(200).send(resUtil.successFalse(statCode.FAIL, resMsg.NO_FIND_RESULT));
-            }
-            else {
-                await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.FIND_ADDRESS_SUCCESS, jsonResult));
-            }
-        })
+        await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.FIND_ADDRESS_SUCCESS, result));
     }
 })
-
-router.get('/', async (req,res)=>{
-
-})
-
 
 module.exports = router;
