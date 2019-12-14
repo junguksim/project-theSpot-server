@@ -6,9 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.use('/user', require('./user'));
-router.use('/party', require('./party'));
-router.use('/result', require('./result'));
+router.use('/users', require('./users'));
+router.use('/parties', require('./parties'));
+router.use('/results', require('./results'));
 router.use('/address', require('./address'));
 
 module.exports = router;
