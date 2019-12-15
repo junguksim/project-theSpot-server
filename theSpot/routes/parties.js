@@ -52,7 +52,6 @@ router.get('/', async (req, res) => {
                 selectAllPartyResult[i].isAdmin = false;
             }
         }
-        console.log(selectAllPartyResult);
         console.log('===============GET ALL PARTY LIST SUCCESS!==================');
         await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.GET_PARTY_LIST_COMPLETE, selectAllPartyResult));
     }
@@ -64,9 +63,12 @@ router.get('/:partyId', async (req, res)=>{
     let partyId = req.params.partyId;
 
     const selectPartyResult = await pool.queryParam_Arr(query.selectParty, [partyId]);
-    console.log(selectPartyResult);
+    const getLocationResult = await pool.queryParam_Arr(query.getUserInfoQuery, [partyId]);
     console.log('====================GET PARTY INFO SUCCESS!================');
-    await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.GET_PARTY_INFO_COMPLETE, selectPartyResult));
+    await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.GET_PARTY_INFO_COMPLETE, {
+        selectPartyResult : selectPartyResult,
+        getLocationResult : getLocationResult
+    }));
 })
 
 //그룹 삭제

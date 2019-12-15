@@ -26,6 +26,7 @@ router.post('/', async (req,res)=>{
     }
     else {
         let ID = getIdxByAccTokenResult[0].userIdx;
+        console.log(ID);
         await pool.queryParam_Arr(query.updateAddress, [req.body.userAddress ,req.body.userX, req.body.userY, ID]);
         await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.UPDATE_ADDRESS_SUCCESS));
     }

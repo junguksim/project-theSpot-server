@@ -10,6 +10,7 @@ module.exports = {
 
     'CENTER_POINT_COMPLETE' : '중간 지점 도출 완료',
     'NO_CENTER_POINT' : '중간 지점이 없습니다.',
+    'FIND_BY_CATEGORY_AND_STATION_COMPLETE' : '카테고리, 역으로 장소검색 완료',
 
     'GET_PARTY_LIST_COMPLETE' : '방 리스트 모두 불러오기 완료',
     'GET_PARTY_INFO_COMPLETE' : '방 정보 불러오기 완료',
@@ -17,5 +18,7 @@ module.exports = {
     'ONLY_LEADER_CAN_DELETE' : '방장만 방을 삭제할 수 있습니다',
     'DELETE_PARTY_SUCCESS' : '성공적으로 방을 삭제했습니다',
     'NULL_VALUES' : '빈 값이 있습니다',
-    'CREATE_PARTY_COMPLETE' : '방을 생성했습니다'
+    'CREATE_PARTY_COMPLETE' : '방을 생성했습니다',
+
+    'WRONG_VALUE' : '값이 올바르지 않습니다'
 }

@@ -14,9 +14,16 @@ router.post('/signin', async (req, res) => {
         await res.status(201).send(resUtil.successTrue(statCode.OK1, resMsg.SIGNIN_SUCCESS));
     }
     else {
-        console.log('NEW LOGIN SUCCESS')
-        const insertUserResult = await pool.queryParam_Arr(query.insertUser, [req.body.email, req.body.profileImg, req.body.nickname, req.headers.accesstoken, req.headers.refreshtoken]);
-        await res.status(201).send(resUtil.successTrue(statCode.OK1, resMsg.SIGNIN_SUCCESS));
+        console.log(req.body);
+        if(!req.body.email||!req.body.profileImg||!req.body.nickname||req.headers.accesstoken||req.headers.refreshtoken||req.body.kakaouuid) {
+            await res.status(200).send(resUtil.successFalse(statCode.FAIL, resMsg.NULL_VALUES));
+        }
+        else {
+            console.log('NEW LOGIN SUCCESS')
+            const insertUserResult = await pool.queryParam_Arr(query.insertUser, [req.body.email, req.body.profileImg, req.body.nickname, req.headers.accesstoken, req.headers.refreshtoken, req.body.kakaouuid]);
+            await res.status(201).send(resUtil.successTrue(statCode.OK1, resMsg.SIGNIN_SUCCESS));
+        }
+        
     }
 })
 
