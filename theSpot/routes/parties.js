@@ -29,6 +29,11 @@ router.post('/', async (req,res)=>{
     }
 })
 
+// //그룹에 가입
+// router.post('/', async (req,res)=>{
+
+// })
+
 //그룹 리스트 불러오기
 router.get('/', async (req, res) => {
     let getIdxByAccTokenResult = await pool.queryParam_Arr(query.getIdxByAccToken, [req.headers.accesstoken]);
