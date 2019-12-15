@@ -4,6 +4,7 @@ module.exports = {
     NO_USER : '유저가 아님',
 
     'FIND_ADDRESS_SUCCESS' : '주소 찾기 성공',
+    'UPDATE_ADDRESS_SUCCESS' : '주소 업데이트 성공',
     'NO_ADDRESS_INPUT' : '주소가 입력되지 않음',
     'NO_FIND_RESULT' : '해당하는 주소가 없음',
 

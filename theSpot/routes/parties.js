@@ -5,7 +5,6 @@ const statCode = require('../module/statusCode');
 const resMsg = require('../module/resMsg');
 const query = require('../module/query');
 const pool = require('../module/pool');
-const jwt = require('../module/jwt');
 
 //그룹 만들기
 router.post('/', async (req,res)=>{
@@ -44,8 +43,15 @@ router.get('/', async (req, res) => {
     }
     else {
         let ID = getIdxByAccTokenResult[0].userIdx;
-        console.log(ID);
         const selectAllPartyResult = await pool.queryParam_Arr(query.selectAllParty, [ID]);
+        for(var i = 0 ; i < selectAllPartyResult.length ; i++) {
+            if(ID == selectAllPartyResult[i].leaderIdx) {
+                selectAllPartyResult[i].isAdmin = true;
+            }
+            else {
+                selectAllPartyResult[i].isAdmin = false;
+            }
+        }
         console.log(selectAllPartyResult);
         console.log('===============GET ALL PARTY LIST SUCCESS!==================');
         await res.status(200).send(resUtil.successTrue(statCode.OK, resMsg.GET_PARTY_LIST_COMPLETE, selectAllPartyResult));

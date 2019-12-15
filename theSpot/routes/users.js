@@ -5,8 +5,6 @@ const statCode = require('../module/statusCode');
 const resUtil = require('../module/responseUtil');
 const pool = require('../module/pool')
 const query = require('../module/query');
-const jwt = require('../module/jwt');
-const upload = require('../config/multer')
 
 router.post('/signin', async (req, res) => {
     let findAlreadyResult = await pool.queryParam_Arr(query.findAlready, [req.body.email]);

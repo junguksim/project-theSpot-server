@@ -5,7 +5,7 @@ module.exports = {
     findAlready : 'SELECT userIdx FROM user WHERE email = ?',
     getLocationQuery : 'SELECT userLatitude, userLongitude FROM user WHERE userIdx IN (SELECT userIdx FROM user_party WHERE partyIdx=?)',
     getIdxByAccToken : 'SELECT userIdx FROM user WHERE accToken = ?',
-    updateAddress : 'UPDATE user SET userLongitude = ? , userLatitude = ? WHERE userIdx = ?',
+    updateAddress : 'UPDATE user SET userAddress = ? , userLongitude = ? , userLatitude = ? WHERE userIdx = ?',
     //--------------------party------------------------------
     insertParty : 'INSERT INTO party (partyName, leaderIdx, userCount) VALUES (?,?,?)',
     insertUserParty : 'INSERT INTO user_party (userIdx, partyIdx) VALUES (?,?)',
